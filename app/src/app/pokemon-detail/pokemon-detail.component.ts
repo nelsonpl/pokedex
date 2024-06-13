@@ -3,11 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Pokemon } from '../interfaces/pokemon.interface';
 import { PokemonService } from '../pokemon/pokemon.service';
 import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-pokemon-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatCardModule],
   templateUrl: './pokemon-detail.component.html',
   styleUrls: ['./pokemon-detail.component.scss'],
 })

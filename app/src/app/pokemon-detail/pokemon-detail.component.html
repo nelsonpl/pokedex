@@ -1,12 +1,16 @@
-<div color="primary">
-  <span>{{ pokemon?.name }}</span>
-</div>
+<mat-card>
+  <mat-card-header>
+    <span>{{ pokemon?.name }}</span>
+  </mat-card-header>
 
-<div *ngIf="pokemon" class="pokemon-detail">
-  <ng-template *ngIf="pokemon.sprites">
-    <img [src]="pokemon.sprites.front_default" alt="{{ pokemon.name }}" />
-  </ng-template>
-  <div><strong>Height:</strong> {{ pokemon.height }}</div>
-  <div><strong>Weight:</strong> {{ pokemon.weight }}</div>
-  <div><strong>Base Experience:</strong> {{ pokemon.base_experience }}</div>
-</div>
+  <mat-card-content>
+    <div *ngIf="pokemon" class="pokemon-detail">
+      <ng-template *ngIf="pokemon.sprites">
+        <img [src]="pokemon.sprites.front_default" alt="{{ pokemon.name }}" />
+      </ng-template>
+      <div><strong>Height:</strong> {{ pokemon.height }}</div>
+      <div><strong>Weight:</strong> {{ pokemon.weight }}</div>
+      <div><strong>Base Experience:</strong> {{ pokemon.base_experience }}</div>
+    </div>
+  </mat-card-content>
+</mat-card>
