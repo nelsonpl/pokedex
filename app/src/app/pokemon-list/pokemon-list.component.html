@@ -1,0 +1,12 @@
+<div color="primary">
+  <span>Pokédex</span>
+</div>
+
+<div class="pokemon-list">
+  <div cols="3" rowHeight="1:1">
+    <div *ngFor="let pokemon of list" (click)="onSelect(pokemon)">
+      <div ckass="mat-card">{{ pokemon.name }}</div>
+    </div>
+  </div>
+  <button mat-button (click)="load()">Load More</button>
+</div>
