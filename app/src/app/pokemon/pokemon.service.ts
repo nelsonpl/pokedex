@@ -6,7 +6,7 @@ import { List } from '../interfaces/list.interface';
 
 @Injectable()
 export class PokemonService {
-  private apiUrl = 'http://localhost:3000/pokemon';
+  private apiUrl = 'http://localhost:3000/api/pokemon';
 
   constructor(private http: HttpClient) {}
 
