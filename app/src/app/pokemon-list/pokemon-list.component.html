@@ -1,12 +1,11 @@
-<div color="primary">
-  <span>Pokédex</span>
-</div>
-
 <div class="pokemon-list">
-  <div cols="3" rowHeight="1:1">
-    <div *ngFor="let pokemon of list" (click)="onSelect(pokemon)">
-      <div ckass="mat-card">{{ pokemon.name }}</div>
-    </div>
+  <mat-list>
+    <div *ngFor="let pokemon of list" >
+      <mat-list-item (click)="onSelect(pokemon)">
+      {{ pokemon.name }}
+    </mat-list-item>
+    <mat-divider></mat-divider>
   </div>
+</mat-list>
   <button *ngIf="showLoadMore" mat-button (click)="load()">Load More</button>
 </div>
