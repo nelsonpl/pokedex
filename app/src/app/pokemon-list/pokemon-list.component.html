@@ -8,5 +8,5 @@
       <div ckass="mat-card">{{ pokemon.name }}</div>
     </div>
   </div>
-  <button mat-button (click)="load()">Load More</button>
+  <button *ngIf="showLoadMore" mat-button (click)="load()">Load More</button>
 </div>

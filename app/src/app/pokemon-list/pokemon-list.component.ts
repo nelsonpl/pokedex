@@ -2,31 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PokemonService } from '../pokemon/pokemon.service';
 import { CommonModule } from '@angular/common';
-import {
-  provideHttpClient,
-  withInterceptorsFromDi,
-  HTTP_INTERCEPTORS,
-} from '@angular/common/http';
 
 @Component({
   selector: 'app-pokemon-list',
   standalone: true,
   imports: [CommonModule],
-  providers: [
-    provideHttpClient(withInterceptorsFromDi()),
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: PokemonService,
-      multi: true,
-    },
-  ],
+  providers: [],
   templateUrl: './pokemon-list.component.html',
   styleUrl: './pokemon-list.component.scss',
 })
 export class PokemonListComponent implements OnInit {
   list: any[] = [];
   offset: number = 0;
-  limit: number = 20;
+  limit: number = 1000;
+  showLoadMore: boolean = true;
 
   constructor(private service: PokemonService, private router: Router) {}
 
@@ -38,6 +27,7 @@ export class PokemonListComponent implements OnInit {
     this.service.list(this.offset, this.limit).subscribe((data) => {
       this.list = this.list.concat(data.results);
       this.offset += this.limit;
+      this.showLoadMore = this.list.length < data.count;
     });
   }
 
