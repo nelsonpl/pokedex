@@ -12,9 +12,9 @@
     "directory": "api/"
   },
   "scripts": {
-    "start": "nest start --prod",
+    "start": "nest start",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "build": "nest build"
+    "deploy": "./deploy.sh"
   },
   "dependencies": {
     "@nestjs/axios": "^3.0.2",
