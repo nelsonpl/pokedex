@@ -14,7 +14,7 @@
   "scripts": {
     "start": "nest start --prod",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "deploy": "./deploy.sh"
+    "build": "nest build"
   },
   "dependencies": {
     "@nestjs/axios": "^3.0.2",
