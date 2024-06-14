@@ -8,11 +8,32 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogOverviewExampleDialog } from '../pokemon-detail-modal/pokemon-detail-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-pokemon-list',
   standalone: true,
-  imports: [CommonModule, MatGridListModule, MatCardModule, MatListModule, MatDividerModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatGridListModule,
+    MatCardModule,
+    MatListModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   templateUrl: './pokemon-list.component.html',
   styleUrl: './pokemon-list.component.scss',
@@ -21,12 +42,21 @@ export class PokemonListComponent implements OnInit {
   list: any[] = [];
   offset: number = 0;
   limit: number = 20;
+  pokemonName: string = '';
   showLoadMore: boolean = true;
+  showClear: boolean = false;
+  filterForm: FormGroup | undefined = undefined;
   readonly dialog = inject(MatDialog);
 
-  constructor(private service: PokemonService, private router: Router) {}
+  constructor(
+    private service: PokemonService,
+    private _formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
+    this.filterForm = this._formBuilder.group({
+      pokemonName: [''],
+    });
     this.load();
   }
 
@@ -39,10 +69,26 @@ export class PokemonListComponent implements OnInit {
   }
 
   onSelect(pokemon: any): void {
-     const id = pokemon.url.split('/').filter(Boolean).pop();
-
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+    const id = pokemon.url.split('/').filter(Boolean).pop();
+    this.dialog.open(DialogOverviewExampleDialog, {
       data: { id },
     });
+  }
+
+  search(): void {
+    this.list = [];
+    this.offset = 0;
+
+    if (this.filterForm?.value.pokemonName) {
+      this.service
+        .getByName(this.filterForm?.value.pokemonName)
+        .subscribe((data) => {
+          this.list = [data];
+          this.showLoadMore = false;
+          this.showClear = true;
+        });
+    } else {
+      this.load();
+    }
   }
 }

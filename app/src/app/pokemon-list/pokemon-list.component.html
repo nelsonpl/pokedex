@@ -1,11 +1,24 @@
 <div class="pokemon-list">
-  <mat-list>
-    <div *ngFor="let pokemon of list" >
-      <mat-list-item (click)="onSelect(pokemon)">
-      {{ pokemon.name }}
-    </mat-list-item>
-    <mat-divider></mat-divider>
+  <div class="example-form">
+    <form *ngIf="filterForm" [formGroup]="filterForm">
+      <mat-form-field>
+        <mat-label>Search by name</mat-label>
+        <input
+          matInput
+          formControlName="pokemonName"
+          placeholder="Ex. Pikachu"
+          (keyup.enter)="search()"
+        />
+      </mat-form-field>
+    </form>
   </div>
-</mat-list>
+  <mat-list>
+    <div *ngFor="let pokemon of list">
+      <mat-list-item (click)="onSelect(pokemon)">
+        {{ pokemon.name }}
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </div>
+  </mat-list>
   <button *ngIf="showLoadMore" mat-button (click)="load()">Load More</button>
 </div>
