@@ -10,11 +10,17 @@ export class PokemonService {
 
   constructor(private http: HttpClient) {}
 
-  list(offset: number = 0, limit: number = 20): Observable<List> {
-    return this.http.get<any>(`${this.apiUrl}?offset=${offset}&limit=${limit}`);
+  list(offset: number, limit: number): Observable<List> {
+    return this.http.get<any>(
+      `${this.apiUrl}?offset=${offset}&limit=${limit}`
+    );
   }
 
-  get(id: number): Observable<Pokemon> {
+  getById(id: number): Observable<Pokemon> {
     return this.http.get<Pokemon>(`${this.apiUrl}/${id}`);
+  }
+
+  getByName(name: string): Observable<Pokemon> {
+    return this.http.get<Pokemon>(`${this.apiUrl}/get-by-name/${name}`);
   }
 }
