@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
 import { firstValueFrom } from "rxjs";
 import { List } from "../interfaces/list.interface";
@@ -21,13 +21,23 @@ export class PokemonService {
 
   async getById(id: number): Promise<any> {
     const url = `${this.url}/${id}`;
-    const response = await firstValueFrom(this.httpService.get(url));
+    let response;
+    try {
+      response = await firstValueFrom(this.httpService.get(url));
+    } catch {
+      throw new NotFoundException("Pokemon not found");
+    }
     return response.data;
   }
 
   async getByName(name: string): Promise<any> {
     const url = `${this.url}/${name}`;
-    const response = await firstValueFrom(this.httpService.get(url));
+    let response;
+    try {
+      response = await firstValueFrom(this.httpService.get(url));
+    } catch {
+      throw new NotFoundException("Pokemon not found");
+    }
     return response.data;
   }
 }
