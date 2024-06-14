@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject, model, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { PokemonService } from '../pokemon/pokemon.service';
 import { CommonModule } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
-import { MatList, MatListModule } from '@angular/material/list';
-import { MatDivider, MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogOverviewExampleDialog } from '../pokemon-detail-modal/pokemon-detail-dialog.component';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -20,6 +22,7 @@ export class PokemonListComponent implements OnInit {
   offset: number = 0;
   limit: number = 20;
   showLoadMore: boolean = true;
+  readonly dialog = inject(MatDialog);
 
   constructor(private service: PokemonService, private router: Router) {}
 
@@ -36,7 +39,10 @@ export class PokemonListComponent implements OnInit {
   }
 
   onSelect(pokemon: any): void {
-    const id = pokemon.url.split('/').filter(Boolean).pop();
-    this.router.navigate(['/pokemon', id]);
+     const id = pokemon.url.split('/').filter(Boolean).pop();
+
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      data: { id },
+    });
   }
 }
