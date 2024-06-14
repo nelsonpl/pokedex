@@ -23,6 +23,6 @@ export class PokemonDetailComponent implements OnInit {
 
   getPokemon(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.service.get(id).subscribe((pokemon) => (this.pokemon = pokemon));
+    this.service.getById(id).subscribe((pokemon) => (this.pokemon = pokemon));
   }
 }
