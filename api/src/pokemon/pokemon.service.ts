@@ -19,8 +19,14 @@ export class PokemonService {
     return list;
   }
 
-  async get(filter: string): Promise<any> {
-    const url = `${this.url}/${filter}`;
+  async getById(id: number): Promise<any> {
+    const url = `${this.url}/${id}`;
+    const response = await firstValueFrom(this.httpService.get(url));
+    return response.data;
+  }
+
+  async getByName(name: string): Promise<any> {
+    const url = `${this.url}/${name}`;
     const response = await firstValueFrom(this.httpService.get(url));
     return response.data;
   }
