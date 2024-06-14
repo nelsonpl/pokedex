@@ -16,7 +16,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "./deploy.sh"
   },
   "dependencies": {
     "@angular/animations": "^18.0.1",
