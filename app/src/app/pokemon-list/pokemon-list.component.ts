@@ -17,6 +17,7 @@ import {
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -48,7 +49,8 @@ export class PokemonListComponent implements OnInit {
 
   constructor(
     private service: PokemonService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -78,13 +80,18 @@ export class PokemonListComponent implements OnInit {
     this.offset = 0;
 
     if (this.filterForm?.value.pokemonName) {
-      this.service
-        .getByName(this.filterForm?.value.pokemonName)
-        .subscribe((data) => {
+      this.service.getByName(this.filterForm?.value.pokemonName).subscribe({
+        next: (data) => {
           this.list = [data];
           this.showLoadMore = false;
           this.showClear = true;
-        });
+        },
+        error: () => {
+          this._snackBar.open('Pokemon not found', 'Close', {
+            duration: 2000,
+          });
+        },
+      });
     } else {
       this.load();
     }
