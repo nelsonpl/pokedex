@@ -1,20 +1,18 @@
-import { Component, OnInit, inject, model, signal } from '@angular/core';
-import { Router } from '@angular/router';
-import { PokemonService } from '../pokemon/pokemon.service';
+import { Component, OnInit, inject } from '@angular/core';
+import { PokemonService } from '../services/pokemon.service';
 import { CommonModule } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogOverviewExampleDialog } from '../pokemon-detail-modal/pokemon-detail-dialog.component';
+import { DialogOverviewExampleDialog } from '../pokemon-detail-dialog/pokemon-detail-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {
   FormBuilder,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
