@@ -4,6 +4,8 @@ import * as request from "supertest";
 import * as nock from "nock";
 import { PokedexApiModule } from "../src/pokedex-api.module";
 
+const pokeapiUrl = "https://pokeapi.co/api/v2/pokemon";
+
 const pokemonList = {
   count: 1,
   next: "",
@@ -11,7 +13,7 @@ const pokemonList = {
   results: [
     {
       name: "bulbasaur",
-      url: "https://pokeapi.co/api/v2/pokemon/1/",
+      url: `${pokeapiUrl}/1/`,
     },
   ],
 };
@@ -45,7 +47,7 @@ describe("Api (e2e)", () => {
   });
 
   it("list pokemons", () => {
-    nock("https://pokeapi.co/api/v2/pokemon")
+    nock(pokeapiUrl)
       .get("?offset=0&limit=20")
       .reply(200, pokemonList);
 
@@ -58,7 +60,7 @@ describe("Api (e2e)", () => {
           results: [
             {
               name: "bulbasaur",
-              url: "https://pokeapi.co/api/v2/pokemon/1/",
+              url: `${pokeapiUrl}/1/`,
             },
           ],
         });
@@ -66,7 +68,7 @@ describe("Api (e2e)", () => {
   });
 
   it("get by id", () => {
-    nock("https://pokeapi.co/api/v2/pokemon").get("/1").reply(200, pokemon);
+    nock(pokeapiUrl).get("/1").reply(200, pokemon);
 
     return request(app.getHttpServer())
       .get(`/pokemon/1`)
@@ -77,7 +79,7 @@ describe("Api (e2e)", () => {
   });
 
   it("get by name", () => {
-    nock("https://pokeapi.co/api/v2/pokemon")
+    nock(pokeapiUrl)
       .get("/bulbasaur")
       .reply(200, pokemon);
 
@@ -94,7 +96,7 @@ describe("Api (e2e)", () => {
   });
 
   it("list pokemons with different offset and limit", () => {
-    nock("https://pokeapi.co/api/v2/pokemon")
+    nock(pokeapiUrl)
       .get("?offset=20&limit=10")
       .reply(200, { count: 0, next: null, previous: null, results: [] });
 
@@ -110,13 +112,13 @@ describe("Api (e2e)", () => {
   });
 
   it("get by non-existent id", () => {
-    nock("https://pokeapi.co/api/v2/pokemon").get("/9999").reply(404);
+    nock(pokeapiUrl).get("/9999").reply(404);
 
     return request(app.getHttpServer()).get(`/pokemon/9999`).expect(404);
   });
 
   it("get by non-existent name", () => {
-    nock("https://pokeapi.co/api/v2/pokemon").get("/nonexistent").reply(404);
+    nock(pokeapiUrl).get("/nonexistent").reply(404);
 
     return request(app.getHttpServer()).get(`/pokemon/nonexistent`).expect(404);
   });
