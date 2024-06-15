@@ -5,16 +5,6 @@
 
 Client application for Pokedex.
 
-## Table of Contents
-
-- [Installation](#installation)
-- [Scripts](#scripts)
-- [Dependencies](#dependencies)
-- [Development Dependencies](#development-dependencies)
-- [License](#license)
-- [Author](#author)
-- [Repository](#repository)
-
 ## Installation
 
 To install and run this project, follow these steps:
