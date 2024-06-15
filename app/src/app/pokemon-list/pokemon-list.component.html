@@ -15,7 +15,9 @@
   class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
 >
   <mat-card *ngFor="let item of list" class="p-4">
-    <h2 class="text-xl font-semibold">{{ item.name }}</h2>
+    <h2 (click)="onSelect(item)" class="text-xl font-semibold cursor-pointer">
+      {{ item.name }}
+    </h2>
   </mat-card>
 </div>
 

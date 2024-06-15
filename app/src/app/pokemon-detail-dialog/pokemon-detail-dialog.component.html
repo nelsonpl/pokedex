@@ -1,13 +1,15 @@
-<h2 mat-dialog-title>Pokemon Details</h2>
+<h2 mat-dialog-title class="text-2xl text-center font-semibold mb-4">Pokemon Details</h2>
 <mat-dialog-content>
-  <div *ngIf="pokemon" class="pokemon-detail">
-    <img [src]="pokemon.sprites?.front_default" alt="{{ pokemon.name }}" />
-    <div><strong>Name:</strong> {{ pokemon.name }}</div>
-    <div><strong>Height:</strong> {{ pokemon.height }}</div>
-    <div><strong>Weight:</strong> {{ pokemon.weight }}</div>
-    <div><strong>Base Experience:</strong> {{ pokemon.base_experience }}</div>
+  <div *ngIf="pokemon" class="flex flex-col items-center">
+    <img class="w-36 h-36 mb-4" [src]="pokemon.sprites?.front_default" alt="{{ pokemon.name }}" />
+    <div class="w-full max-w-xs text-left">
+      <div class="mb-2"><strong>Name:</strong> {{ pokemon.name }}</div>
+      <div class="mb-2"><strong>Height:</strong> {{ pokemon.height }}</div>
+      <div class="mb-2"><strong>Weight:</strong> {{ pokemon.weight }}</div>
+      <div class="mb-2"><strong>Base Experience:</strong> {{ pokemon.base_experience }}</div>
+    </div>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions>
+<mat-dialog-actions class="flex justify-center">
   <button mat-button (click)="onNoClick()">Close</button>
 </mat-dialog-actions>
