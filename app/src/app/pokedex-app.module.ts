@@ -7,7 +7,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { PokemonService } from './pokemon/pokemon.service';
+import { PokemonService } from './services/pokemon.service';
 
 import { routes } from './pokedex-app.routes';
 import { PokedexAppComponent } from './pokedex-app.component';
