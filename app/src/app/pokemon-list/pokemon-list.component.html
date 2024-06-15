@@ -13,8 +13,10 @@
 </div>
 <mat-list>
   <div *ngFor="let pokemon of list">
-    <mat-list-item (click)="onSelect(pokemon)">
-      {{ pokemon.name }}
+    <mat-list-item>
+      <div (click)="onSelect(pokemon)" class="cursor-pointer">
+        {{ pokemon.name }}
+      </div>
     </mat-list-item>
     <mat-divider></mat-divider>
   </div>

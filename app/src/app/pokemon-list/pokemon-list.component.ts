@@ -69,7 +69,7 @@ export class PokemonListComponent implements OnInit {
   }
 
   onSelect(pokemon: any): void {
-    const id = pokemon.url.split('/').filter(Boolean).pop();
+    const id = pokemon.id ?? pokemon.url.split('/').filter(Boolean).pop();
     this.dialog.open(DialogOverviewExampleDialog, {
       data: { id },
     });
