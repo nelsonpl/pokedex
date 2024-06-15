@@ -1,4 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, model, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { PokemonService } from '../services/pokemon.service';
 import { CommonModule } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -34,7 +35,6 @@ import { MatInputModule } from '@angular/material/input';
   ],
   providers: [],
   templateUrl: './pokemon-list.component.html',
-  styleUrl: './pokemon-list.component.scss',
 })
 export class PokemonListComponent implements OnInit {
   list: any[] = [];
