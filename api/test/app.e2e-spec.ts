@@ -77,7 +77,9 @@ describe("Api (e2e)", () => {
   });
 
   it("get by name", () => {
-    nock("https://pokeapi.co/api/v2/pokemon").get("/bulbasaur").reply(200, pokemon);
+    nock("https://pokeapi.co/api/v2/pokemon")
+      .get("/bulbasaur")
+      .reply(200, pokemon);
 
     return request(app.getHttpServer())
       .get(`/pokemon/bulbasaur`)
@@ -85,5 +87,37 @@ describe("Api (e2e)", () => {
       .expect(({ body }) => {
         expect(body).toBeDefined();
       });
+  });
+
+  it("non-existent endpoint", () => {
+    return request(app.getHttpServer()).get(`/invalid-endpoint`).expect(404);
+  });
+
+  it("list pokemons with different offset and limit", () => {
+    nock("https://pokeapi.co/api/v2/pokemon")
+      .get("?offset=20&limit=10")
+      .reply(200, { count: 0, next: null, previous: null, results: [] });
+
+    return request(app.getHttpServer())
+      .get(`/pokemon?offset=20&limit=10`)
+      .expect(200)
+      .expect(({ body }) => {
+        expect(body).toEqual({
+          count: 0,
+          results: [],
+        });
+      });
+  });
+
+  it("get by non-existent id", () => {
+    nock("https://pokeapi.co/api/v2/pokemon").get("/9999").reply(404);
+
+    return request(app.getHttpServer()).get(`/pokemon/9999`).expect(404);
+  });
+
+  it("get by non-existent name", () => {
+    nock("https://pokeapi.co/api/v2/pokemon").get("/nonexistent").reply(404);
+
+    return request(app.getHttpServer()).get(`/pokemon/nonexistent`).expect(404);
   });
 });
