@@ -1,24 +1,31 @@
-<div>
-  <form *ngIf="filterForm" [formGroup]="filterForm">
-    <mat-form-field>
-      <mat-label>Search by name</mat-label>
-      <input
-        matInput
-        formControlName="pokemonName"
-        placeholder="Ex. Pikachu"
-        (keyup.enter)="search()"
-      />
-    </mat-form-field>
-  </form>
+<form *ngIf="filterForm" [formGroup]="filterForm">
+  <mat-form-field appearance="fill" class="w-full mb-6">
+    <mat-label>Search by name</mat-label>
+    <input
+      matInput
+      class="p-2"
+      formControlName="pokemonName"
+      placeholder="Ex. Pikachu"
+      (keyup.enter)="search()"
+    />
+  </mat-form-field>
+</form>
+
+<div
+  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+>
+  <mat-card *ngFor="let item of list" class="p-4">
+    <h2 class="text-xl font-semibold">{{ item.name }}</h2>
+  </mat-card>
 </div>
-<mat-list>
-  <div *ngFor="let pokemon of list">
-    <mat-list-item>
-      <div (click)="onSelect(pokemon)" class="cursor-pointer">
-        {{ pokemon.name }}
-      </div>
-    </mat-list-item>
-    <mat-divider></mat-divider>
-  </div>
-</mat-list>
-<button *ngIf="showLoadMore" mat-button (click)="load()">Load More</button>
+
+<div *ngIf="showLoadMore" class="flex justify-center mt-6">
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="load()"
+    class="bg-blue-500 text-white"
+  >
+    Load More
+  </button>
+</div>
