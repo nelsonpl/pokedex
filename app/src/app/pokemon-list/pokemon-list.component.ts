@@ -1,13 +1,11 @@
-import { Component, OnInit, inject, model, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
 import { PokemonService } from '../services/pokemon.service';
 import { CommonModule } from '@angular/common';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogOverviewExampleDialog } from '../pokemon-detail-dialog/pokemon-detail-dialog.component';
+import { PokemonDetailDialog } from '../pokemon-detail-dialog/pokemon-detail-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {
   FormBuilder,
@@ -25,7 +23,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   imports: [
     CommonModule,
     FormsModule,
-    MatGridListModule,
     MatCardModule,
     MatListModule,
     MatDividerModule,
@@ -70,7 +67,7 @@ export class PokemonListComponent implements OnInit {
 
   onSelect(pokemon: any): void {
     const id = pokemon.id ?? pokemon.url.split('/').filter(Boolean).pop();
-    this.dialog.open(DialogOverviewExampleDialog, {
+    this.dialog.open(PokemonDetailDialog, {
       data: { id },
     });
   }
