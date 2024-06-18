@@ -1,4 +1,3 @@
-```markdown
 # Pokedex App
 
 ## Description
